@@ -80,7 +80,7 @@ jobs:
       - name: Debug token
         run: |
           echo "Token is set: $([ -z '${{ inputs.LUREST_DISPATCH_TOKEN }}' ] && echo 'NO' || echo 'YES')"
-          echo "Token length: ${#GH_TOKEN}"
+          echo "Token length: ${#{{ inputs.LUREST_DISPATCH_TOKEN }}}"  # ← inputs から直接取得
     
       - name: Dispatch private workflow
         shell: bash
@@ -94,7 +94,11 @@ jobs:
         run: |
           set -euo pipefail
 
+          echo "Debug: GH_TOKEN length: ${#GH_TOKEN}"
+          echo "Debug: inputs.LUREST_DISPATCH_TOKEN: ${{ inputs.LUREST_DISPATCH_TOKEN }}"
+
           echo "🚀 Dispatching ${TARGET_REPO}/${WORKFLOW_FILE} @ ${TARGET_REF}"
+          
           gh workflow run "${WORKFLOW_FILE}" \
             --repo "${TARGET_REPO}" \
             --ref "${TARGET_REF}" \
