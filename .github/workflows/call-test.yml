@@ -6,7 +6,7 @@ on:
       target:
         description: "起動する workflow(test-a / test-b)"
         required: false
-        default: "test-a"
+        default: "test-b"
         type: string
       message:
         description: "private-workflows 側へ渡すメッセージ"
@@ -25,8 +25,7 @@ jobs:
     with:
       caller_repo: ${{ github.repository }}
       message: ${{ inputs.message }}
-    secrets:
-      LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
+      LUREST_DISPATCH_TOKEN: ""
 
   call-test-b:
     if: ${{ inputs.target == 'test-b' }}

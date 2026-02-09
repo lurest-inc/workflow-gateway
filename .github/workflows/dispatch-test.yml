@@ -87,6 +87,7 @@ jobs:
             --ref "${TARGET_REF}" \
             --field "caller_repo=${CALLER_REPO}" \
             --field "message=${MESSAGE}" \
+            --field "LUREST_DISPATCH_TOKEN=${{ inputs.LUREST_DISPATCH_TOKEN }}"
 
           echo "✅ Dispatch accepted."
 
