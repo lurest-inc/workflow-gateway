@@ -88,19 +88,28 @@ jobs:
           MESSAGE: ${{ inputs.message }}
         run: |
           set -euo pipefail
-
-          echo "Debug: GH_TOKEN length: ${#GH_TOKEN}"
-          echo "Debug: inputs.LUREST_DISPATCH_TOKEN: ${{ inputs.LUREST_DISPATCH_TOKEN }}"
-
+        
+          echo "=== Dispatch to private-workflows ==="
+          echo "GH_TOKEN length: ${#GH_TOKEN}"
+          echo "CALLER_REPO: ${CALLER_REPO}"
+          echo "TARGET_REPO: ${TARGET_REPO}"
+          echo "WORKFLOW_FILE: ${WORKFLOW_FILE}"
+          echo ""
+          echo "Test: Verify token access"
+          gh api repos/lurest-inc/workflow-gateway --jq '.name' || echo "❌ Failed to access workflow-gateway"
+          gh api repos/lurest-inc/private-workflows --jq '.name' || echo "❌ Failed to access private-workflows"
+          echo ""
+        
           echo "🚀 Dispatching ${TARGET_REPO}/${WORKFLOW_FILE} @ ${TARGET_REF}"
-          
           gh workflow run "${WORKFLOW_FILE}" \
             --repo "${TARGET_REPO}" \
             --ref "${TARGET_REF}" \
             --field "caller_repo=${CALLER_REPO}" \
-            --field "message=${MESSAGE}"
-
+            --field "message=${MESSAGE}" \
+            --field "LUREST_DISPATCH_TOKEN=${GH_TOKEN}"
+        
           echo "✅ Dispatch accepted."
+
 
       - name: Summary
         run: |
