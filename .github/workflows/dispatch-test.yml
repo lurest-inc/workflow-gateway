@@ -33,8 +33,9 @@ jobs:
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
+          owner: lurest-inc
           repositories: |
-            lurest-inc/private-workflows
+            private-workflows
 
       - name: Validate inputs
         shell: bash
