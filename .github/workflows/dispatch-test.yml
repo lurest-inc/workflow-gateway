@@ -21,7 +21,32 @@ on:
 jobs:
   dispatch:
     runs-on: ubuntu-latest
+    env:
+      ALLOWED_TARGETS: |
+        {
+          "test-a": "Test workflow for target A",
+          "test-b": "Test workflow for target B"
+        }
     steps:
+      - name: Validate inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          TARGET="${{ inputs.target }}"
+          ALLOWLIST=($(echo "$ALLOWED_TARGETS" | jq -r 'keys[]'))
+
+          allowed=false
+          for target in "${ALLOWLIST[@]}"; do
+            if [[ "$TARGET" == "$target" ]]; then allowed=true; fi
+          done
+
+          if [[ "$allowed" != "true" ]]; then
+            echo "❌ Invalid target: $TARGET"
+            echo "Allowed targets: ${ALLOWLIST[*]}"
+            exit 1
+          fi
+
       - name: Resolve workflow file
         id: resolve
         shell: bash
@@ -31,11 +56,6 @@ jobs:
           case "${{ inputs.target }}" in
             test-a) echo "workflow_file=test-a.yml" >> "$GITHUB_OUTPUT" ;;
             test-b) echo "workflow_file=test-b.yml" >> "$GITHUB_OUTPUT" ;;
-            *)
-              echo "❌ invalid target: ${{ inputs.target }}"
-              echo "allowed targets: test-a, test-b"
-              exit 1
-              ;;
           esac
 
       - name: Dispatch private workflow
@@ -50,33 +70,14 @@ jobs:
         run: |
           set -euo pipefail
 
-          payload=$(python - <<'PY'
-import json, os
-print(json.dumps({
-  "ref": os.environ["TARGET_REF"],
-  "inputs": {
-    "caller_repo": os.environ["CALLER_REPO"],
-    "message": os.environ["MESSAGE"]
-  }
-}))
-PY
-)
-
           echo "🚀 Dispatching ${TARGET_REPO}/${WORKFLOW_FILE} @ ${TARGET_REF}"
-          code=$(curl -L -sS -o /dev/null -w "%{http_code}" \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${TARGET_REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches" \
-            -d "${payload}")
+          gh workflow run "${WORKFLOW_FILE}" \
+            --repo "${TARGET_REPO}" \
+            --ref "${TARGET_REF}" \
+            --field "caller_repo=${CALLER_REPO}" \
+            --field "message=${MESSAGE}"
 
-          if [[ "$code" != "204" ]]; then
-            echo "❌ Dispatch failed. HTTP ${code}"
-            exit 1
-          fi
-
-          echo "✅ Dispatch accepted (HTTP 204)."
+          echo "✅ Dispatch accepted."
 
       - name: Summary
         run: |

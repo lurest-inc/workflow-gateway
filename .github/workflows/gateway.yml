@@ -70,35 +70,22 @@ jobs:
           # inputs_json が壊れていたら止める
           echo "$INPUTS_JSON" | python -c 'import json,sys; json.load(sys.stdin)'
 
-          # payload を生成（jq で JSON 構築）
-          payload=$(jq -n \
-            --arg ref "$TARGET_REF" \
-            --arg inputs_json "$INPUTS_JSON" \
-            '{ref: $ref, inputs: ($inputs_json | fromjson)}')
-
           echo "🚀 Dispatching ${TARGET_REPO} / ${WORKFLOW_FILE} @ ${TARGET_REF}"
 
-          # レスポンスボディを一時ファイルに保存
-          response_file=$(mktemp)
-          code=$(curl -L -sS -o "${response_file}" -w "%{http_code}" \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${GH_TOKEN}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/${TARGET_REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches" \
-            -d "${payload}")
+          # JSON inputs から個別の --field 引数を生成
+          declare -a fields
+          while IFS= read -r key; do
+            value=$(echo "$INPUTS_JSON" | jq -r ".\"$key\"")
+            fields+=("--field" "$key=$value")
+          done < <(echo "$INPUTS_JSON" | jq -r 'keys[]')
 
-          if [[ "$code" != "204" ]]; then
-            echo "❌ Dispatch failed. HTTP ${code}"
-            echo "Error response:"
-            cat "${response_file}" | jq '.' || cat "${response_file}"
-            rm -f "${response_file}"
-            exit 1
-          fi
+          # gh CLI で workflow_dispatch を実行
+          gh workflow run "${WORKFLOW_FILE}" \
+            --repo "${TARGET_REPO}" \
+            --ref "${TARGET_REF}" \
+            "${fields[@]}"
 
-          rm -f "${response_file}"
-
-          echo "✅ Dispatch accepted (HTTP 204)."
+          echo "✅ Dispatch accepted."
 
       - name: Summary
         run: |
