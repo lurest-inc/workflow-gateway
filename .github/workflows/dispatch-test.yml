@@ -1,6 +1,22 @@
 name: Lurest Gateway Dispatch (to private-workflows)
 
 on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "起動する workflow(test-a / test-b)"
+        required: false
+        default: "test-a"
+        type: string
+      message:
+        description: "private-workflows 側へ渡すメッセージ"
+        required: false
+        default: "Dispatched via workflow-gateway"
+        type: string
+      LUREST_DISPATCH_TOKEN:
+        description: "fine-grained PAT(private-workflows に対して Actions: write が必要)"
+        required: true
+        type: string  
   workflow_call:
     inputs:
       target:
