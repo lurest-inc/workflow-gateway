@@ -76,6 +76,51 @@ jobs:
 
       - name: Mask sensitive token
         run: echo "::add-mask::${{ inputs.LUREST_DISPATCH_TOKEN }}"
+
+      - name: Test token with git command
+        shell: bash
+        env:
+          GH_TOKEN: ${{ inputs.LUREST_DISPATCH_TOKEN }}
+        run: |
+          set -euo pipefail
+      
+          echo "=== Git Command Test ==="
+          
+          # トークンを git credentials として使用
+          git ls-remote https://x-access-token:${GH_TOKEN}@github.com/lurest-inc/private-workflows.git
+          
+          if [ $? -eq 0 ]; then
+            echo "✅ Token is valid (git test passed)"
+          else
+            echo "❌ Token is invalid (git test failed)"
+          fi
+          
+      - name: Validate token across repositories
+        shell: bash
+        env:
+          GH_TOKEN: ${{ inputs.LUREST_DISPATCH_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          echo "=== Token Validation Test ==="
+
+          # Test 1: Check access to workflow-gateway
+          echo ""
+          echo "📋 Test 1: Access to workflow-gateway"
+          gh api repos/lurest-inc/workflow-gateway --jq '.name' || echo "❌ Failed to access workflow-gateway"
+
+          # Test 2: Check access to private-workflows
+          echo ""
+          echo "📋 Test 2: Access to private-workflows"
+          gh api repos/lurest-inc/private-workflows --jq '.name' || echo "❌ Failed to access private-workflows"
+
+          # Test 3: Check if we can list workflows in private-workflows
+          echo ""
+          echo "📋 Test 3: List workflows in private-workflows"
+          gh api repos/lurest-inc/private-workflows/actions/workflows --jq '.workflows[].name' || echo "❌ Failed to list workflows"
+
+          echo ""
+          echo "✅ Token validation complete"
     
       - name: Dispatch private workflow
         shell: bash
@@ -94,13 +139,9 @@ jobs:
           echo "CALLER_REPO: ${CALLER_REPO}"
           echo "TARGET_REPO: ${TARGET_REPO}"
           echo "WORKFLOW_FILE: ${WORKFLOW_FILE}"
-          echo ""
-          echo "Test: Verify token access"
-          gh api repos/lurest-inc/workflow-gateway --jq '.name' || echo "❌ Failed to access workflow-gateway"
-          gh api repos/lurest-inc/private-workflows --jq '.name' || echo "❌ Failed to access private-workflows"
-          echo ""
         
           echo "🚀 Dispatching ${TARGET_REPO}/${WORKFLOW_FILE} @ ${TARGET_REF}"
+          
           gh workflow run "${WORKFLOW_FILE}" \
             --repo "${TARGET_REPO}" \
             --ref "${TARGET_REF}" \
