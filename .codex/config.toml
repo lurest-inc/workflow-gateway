@@ -1,0 +1,20 @@
+model = "gpt-5.3-codex"
+model_reasoning_effort = "medium"
+
+[env]
+CODEX_ENABLE_TELEMETRY = "false"
+
+[permissions]
+allow = [
+
+]
+
+ask = [
+  "Bash(git rm:*)",
+  "Bash(mv:*)",
+  "Bash(rm:*)"
+]
+
+deny = [
+
+]
