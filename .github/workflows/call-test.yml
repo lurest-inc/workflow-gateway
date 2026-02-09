@@ -19,14 +19,6 @@ on:
         required: true
 
 jobs:
-  call-test-a:
-    if: ${{ inputs.target == 'test-a' }}
-    uses: lurest-inc/private-workflows/.github/workflows/test-a.yml@main
-    with:
-      caller_repo: ${{ github.repository }}
-      message: ${{ inputs.message }}
-      LUREST_DISPATCH_TOKEN: ""
-
   call-test-b:
     if: ${{ inputs.target == 'test-b' }}
     uses: lurest-inc/private-workflows/.github/workflows/test-b.yml@main
