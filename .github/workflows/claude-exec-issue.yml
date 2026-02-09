@@ -11,9 +11,9 @@ on:
         type: string
 
 permissions:
-  contents: write
-  pull-requests: write
-  issues: write
+  contents: read
+  pull-requests: read
+  issues: read
 
 jobs:
   exec-issue:
@@ -25,4 +25,4 @@ jobs:
       repository: ${{ github.repository }}
       issue_number: ${{ github.event_name == 'workflow_dispatch' && inputs.issue_number || github.event.issue.number }}
     secrets:
-      GITHUB_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
+      LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
