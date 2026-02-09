@@ -1,0 +1,38 @@
+name: Lurest Gateway Call (to private-workflows)
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        description: "起動する workflow(test-a / test-b)"
+        required: false
+        default: "test-a"
+        type: string
+      message:
+        description: "private-workflows 側へ渡すメッセージ"
+        required: false
+        default: "Dispatched via workflow-gateway"
+        type: string
+    secrets:
+      LUREST_DISPATCH_TOKEN:
+        description: "fine-grained PAT(private-workflows に対して Actions: write が必要)"
+        required: true
+
+jobs:
+  call-test-a:
+    if: ${{ inputs.target == 'test-a' }}
+    uses: lurest-inc/private-workflows/.github/workflows/test-a.yml@main
+    with:
+      caller_repo: ${{ github.repository }}
+      message: ${{ inputs.message }}
+    secrets:
+      LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
+
+  call-test-b:
+    if: ${{ inputs.target == 'test-b' }}
+    uses: lurest-inc/private-workflows/.github/workflows/test-b.yml@main
+    with:
+      caller_repo: ${{ github.repository }}
+      message: ${{ inputs.message }}
+    secrets:
+      LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}

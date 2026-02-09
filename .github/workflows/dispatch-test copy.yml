@@ -16,22 +16,6 @@ on:
       LUREST_DISPATCH_TOKEN:
         description: "fine-grained PAT(private-workflows に対して Actions: write が必要)"
         required: true
-        type: string  
-  workflow_call:
-    inputs:
-      target:
-        description: "起動する workflow(test-a / test-b)"
-        required: false
-        default: "test-a"
-        type: string
-      message:
-        description: "private-workflows 側へ渡すメッセージ"
-        required: false
-        default: "Dispatched via workflow-gateway"
-        type: string
-      LUREST_DISPATCH_TOKEN:
-        description: "fine-grained PAT(private-workflows に対して Actions: write が必要)"
-        required: true
         type: string
 
 jobs:
@@ -44,6 +28,14 @@ jobs:
           "test-b": "Test workflow for target B"
         }
     steps:
+      - uses: actions/create-github-app-token@v2.2.1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+          repositories: |
+            lurest-inc/private-workflows
+
       - name: Validate inputs
         shell: bash
         run: |
@@ -73,11 +65,11 @@ jobs:
             test-a) echo "workflow_file=test-a.yml" >> "$GITHUB_OUTPUT" ;;
             test-b) echo "workflow_file=test-b.yml" >> "$GITHUB_OUTPUT" ;;
           esac
-    
+
       - name: Dispatch private workflow
         shell: bash
         env:
-          GH_TOKEN: ${{ inputs.LUREST_DISPATCH_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
           TARGET_REPO: lurest-inc/private-workflows
           WORKFLOW_FILE: ${{ steps.resolve.outputs.workflow_file }}
           TARGET_REF: main
@@ -85,23 +77,18 @@ jobs:
           MESSAGE: ${{ inputs.message }}
         run: |
           set -euo pipefail
-        
+
           echo "=== Dispatch to private-workflows ==="
-          echo "GH_TOKEN length: ${#GH_TOKEN}"
-          echo "CALLER_REPO: ${CALLER_REPO}"
-          echo "TARGET_REPO: ${TARGET_REPO}"
-          echo "WORKFLOW_FILE: ${WORKFLOW_FILE}"
-        
+
           echo "🚀 Dispatching ${TARGET_REPO}/${WORKFLOW_FILE} @ ${TARGET_REF}"
-          
+
           gh workflow run "${WORKFLOW_FILE}" \
             --repo "${TARGET_REPO}" \
             --ref "${TARGET_REF}" \
             --field "caller_repo=${CALLER_REPO}" \
             --field "message=${MESSAGE}" \
-        
-          echo "✅ Dispatch accepted."
 
+          echo "✅ Dispatch accepted."
 
       - name: Summary
         run: |
