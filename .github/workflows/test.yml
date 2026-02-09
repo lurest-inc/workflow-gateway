@@ -27,6 +27,7 @@ jobs:
       - name: Write summary
         run: |
           echo "## ✅ workflow-gateway test called" >> $GITHUB_STEP_SUMMARY
-          echo "- caller repo: \`${{ github.repository }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- caller repo (input): \`${{ inputs.caller_repo }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- actual repo: \`${{ github.repository }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- actor: \`${{ github.actor }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- message: \`${{ inputs.message }}\`" >> $GITHUB_STEP_SUMMARY
