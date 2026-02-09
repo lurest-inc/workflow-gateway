@@ -77,23 +77,26 @@ jobs:
       - name: Mask sensitive token
         run: echo "::add-mask::${{ inputs.LUREST_DISPATCH_TOKEN }}"
 
-      - name: Test token with git command
+      - name: Validate received token with gh command
         shell: bash
         env:
           GH_TOKEN: ${{ inputs.LUREST_DISPATCH_TOKEN }}
         run: |
           set -euo pipefail
       
-          echo "=== Git Command Test ==="
+          echo "=== Validating token received in dispatch-test ==="
           
-          # トークンを git credentials として使用
-          git ls-remote https://x-access-token:${GH_TOKEN}@github.com/lurest-inc/private-workflows.git
+          echo "Test 1: Get authenticated user"
+          gh api user --jq '.login' || echo "❌ Failed"
           
-          if [ $? -eq 0 ]; then
-            echo "✅ Token is valid (git test passed)"
-          else
-            echo "❌ Token is invalid (git test failed)"
-          fi
+          echo ""
+          echo "Test 2: Access private-workflows"
+          gh api repos/lurest-inc/private-workflows --jq '.name' || echo "❌ Failed"
+          
+          echo ""
+          echo "Test 3: List workflows"
+          gh api repos/lurest-inc/private-workflows/actions/workflows --jq '.workflows[].name' || echo "❌ Failed"
+
           
       - name: Validate token across repositories
         shell: bash
