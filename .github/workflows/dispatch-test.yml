@@ -13,10 +13,10 @@ on:
         required: false
         default: "Dispatched via workflow-gateway"
         type: string
-    secrets:
       LUREST_DISPATCH_TOKEN:
         description: "fine-grained PAT(private-workflows に対して Actions: write が必要)"
         required: true
+        type: string
 
 jobs:
   dispatch:
@@ -58,10 +58,13 @@ jobs:
             test-b) echo "workflow_file=test-b.yml" >> "$GITHUB_OUTPUT" ;;
           esac
 
+      - name: Mask sensitive token
+        run: echo "::add-mask::${{ inputs.LUREST_DISPATCH_TOKEN }}"
+
       - name: Dispatch private workflow
         shell: bash
         env:
-          GH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
+          GH_TOKEN: ${{ inputs.LUREST_DISPATCH_TOKEN }}
           TARGET_REPO: lurest-inc/private-workflows
           WORKFLOW_FILE: ${{ steps.resolve.outputs.workflow_file }}
           TARGET_REF: main
