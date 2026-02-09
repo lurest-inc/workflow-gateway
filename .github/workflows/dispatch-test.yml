@@ -77,6 +77,20 @@ jobs:
       - name: Mask sensitive token
         run: echo "::add-mask::${{ inputs.LUREST_DISPATCH_TOKEN }}"
 
+      - name: Debug token generation
+        shell: bash
+        run: |
+          set -euo pipefail
+          
+          echo "=== Token Generation Debug ==="
+          echo "APP_ID: ${{ vars.APP_ID }}"
+          echo "PRIVATE_KEY exists: $([ -z '${{ secrets.PRIVATE_KEY }}' ] && echo 'NO' || echo 'YES')"
+          echo "PRIVATE_KEY length: ${#PRIVATE_KEY}"
+          echo "Generated token exists: $([ -z '${{ inputs.LUREST_DISPATCH_TOKEN }}' ] && echo 'NO' || echo 'YES')"
+          echo "Generated token length: $(echo -n '${{ inputs.LUREST_DISPATCH_TOKEN }}' | wc -c)"
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+
       - name: Validate received token with gh command
         shell: bash
         env:
