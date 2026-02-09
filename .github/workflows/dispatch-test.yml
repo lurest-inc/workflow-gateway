@@ -76,7 +76,12 @@ jobs:
 
       - name: Mask sensitive token
         run: echo "::add-mask::${{ inputs.LUREST_DISPATCH_TOKEN }}"
-
+        
+      - name: Debug token
+        run: |
+          echo "Token is set: $([ -z '${{ inputs.LUREST_DISPATCH_TOKEN }}' ] && echo 'NO' || echo 'YES')"
+          echo "Token length: ${#GH_TOKEN}"
+    
       - name: Dispatch private workflow
         shell: bash
         env:
