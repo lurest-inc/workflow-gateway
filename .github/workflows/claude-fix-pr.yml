@@ -1,0 +1,28 @@
+name: Claude Fix PR
+
+on:
+  pull_request:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR番号'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
+jobs:
+  fix-pr:
+    if: |
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'claude-fix-review')) ||
+      github.event_name == 'workflow_dispatch'
+    uses: lurest-inc/private-workflows/.github/workflows/cc-fix-pr.yml@main
+    with:
+      repository: ${{ github.repository }}
+      pr_number: ${{ github.event_name == 'workflow_dispatch' && inputs.pr_number || github.event.pull_request.number }}
+    secrets:
+      LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
