@@ -1,6 +1,10 @@
 # workflow-gateway
 
+[![Pages Deploy](https://github.com/lurest-inc/workflow-gateway/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/lurest-inc/workflow-gateway/actions/workflows/pages/pages-build-deployment)
+
 Lurest の private workflows を `workflow_dispatch` で起動するための **Gateway**（入口）です。
+
+📄 **ドキュメント**: [https://lurest-inc.github.io/workflow-gateway/](https://lurest-inc.github.io/workflow-gateway/)
 
 ## 利用者側（あなたのリポジトリ）でやること
 
