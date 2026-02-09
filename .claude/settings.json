@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "respectGitignore": true,
+  "cleanupPeriodDays": 30,
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "false"
+  },
+  "includeCoAuthoredBy": true,
+  "permissions": {
+    "allow": [
+      
+    ],
+    "ask": [
+      "Bash(git rm:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": [
+      
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": []
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": []
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": []
+      }
+    ]
+  },
+  "enabledPlugins": {},
+  "language": "japanese",
+  "spinnerTipsEnabled": false,
+  "alwaysThinkingEnabled": true,
+  "promptSuggestionEnabled": true
+}

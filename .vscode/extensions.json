@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "Anthropic.claude-code",
+    "biomejs.biome",
+    "mervin.markdown-formatter",
+    "ms-ceintl.vscode-language-pack-ja",
+    "redhat.vscode-xml",
+    "redhat.vscode-yaml",
+    "streetsidesoftware.code-spell-checker",
+    "vscode-icons-team.vscode-icons"
+  ]
+}

@@ -1,0 +1,32 @@
+name: Lurest Gateway Test
+
+on:
+  workflow_call:
+    inputs:
+      caller_repo:
+        required: true
+        type: string
+      message:
+        description: "表示したいメッセージ"
+        required: false
+        default: "Hello from workflow-gateway test!"
+        type: string
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print to console
+        run: |
+          echo "✅ workflow-gateway/test.yml was called!"
+          echo "caller repo: ${{ github.repository }}"
+          echo "caller run id: ${{ github.run_id }}"
+          echo "actor: ${{ github.actor }}"
+          echo "message: ${{ inputs.message }}"
+
+      - name: Write summary
+        run: |
+          echo "## ✅ workflow-gateway test called" >> $GITHUB_STEP_SUMMARY
+          echo "- caller repo: \`${{ github.repository }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- actor: \`${{ github.actor }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- message: \`${{ inputs.message }}\`" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,15 @@
+{
+  "name": "@lurest-inc/workflow-gateway",
+  "description": "",
+  "author": "mabubu0203 <mabu_ip@msn.com> (https://github.com/mabubu0203/)",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@biomejs/biome": "2.3.14",
+    "cspell": "9.6.4",
+    "husky": "9.1.7",
+    "rimraf": "6.1.2"
+  },
+  "scripts": {
+    "prepare": "husky"
+  }
+}
