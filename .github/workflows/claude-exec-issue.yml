@@ -1,0 +1,28 @@
+name: Claude Exec Issue
+
+on:
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue番号'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  exec-issue:
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'claude-implement')) ||
+      github.event_name == 'workflow_dispatch'
+    uses: lurest-inc/private-workflows/.github/workflows/cc-exec-issue.yml@main
+    with:
+      repository: ${{ github.repository }}
+      issue_number: ${{ github.event_name == 'workflow_dispatch' && inputs.issue_number || github.event.issue.number }}
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
