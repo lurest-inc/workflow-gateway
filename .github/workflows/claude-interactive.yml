@@ -1,3 +1,7 @@
+# ⚠️ DEPRECATED: このワークフローは非推奨です
+# 代わりに claude-gateway.yml を使用してください
+# 移行ガイド: https://github.com/lurest-inc/workflow-gateway#migration-guide
+
 name: Claude Interactive
 
 on:
