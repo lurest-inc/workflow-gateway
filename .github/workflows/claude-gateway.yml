@@ -10,11 +10,6 @@ on:
         description: "Claude Code OAuth Token"
         required: true
 
-permissions:
-  contents: read
-  pull-requests: read
-  issues: read
-
 jobs:
   gateway:
     uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@main
