@@ -46,7 +46,7 @@ on:
 
 jobs:
   claude:
-    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@main
+    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.3
     secrets:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
