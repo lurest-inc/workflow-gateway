@@ -26,7 +26,16 @@ Lurest の private workflows を `workflow_dispatch` で起動するための **
 
 ### 1. リポジトリに @mabubu0203 を招待する
 
-リポジトリの **Settings > Collaborators** から @mabubu0203 を招待してください。
+リポジトリの **Settings > Collaborators and teams** から @mabubu0203 を招待してください。
+
+Secret の登録には **Admin** ロールが必要です。以下を参考にロールを設定してください。
+
+| ロール | Secret の登録（Settings UI） |
+|-------|:---:|
+| Read / Triage / Write / Maintain | ✗ |
+| **Admin** | ✅ |
+
+> **注意**: @mabubu0203 を招待する際は、ロールを **Admin** に設定してください。
 
 ### 2. @mabubu0203 に PAT 発行を依頼する
 
