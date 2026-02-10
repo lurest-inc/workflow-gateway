@@ -14,10 +14,10 @@
 | Secret名 | 必須 | 説明 |
 |---------|:----:|------|
 | `GITHUB_TOKEN` | ✅ | GitHub Actions が自動提供するトークン。明示的な設定は不要ですが、呼び出し元で渡す必要があります。 |
-| `LUREST_DISPATCH_TOKEN` | ✅ | `lurest-inc/private-workflows` へのアクセス権を持つ PAT。リポジトリ管理者から取得してください。 |
+| `LUREST_DISPATCH_TOKEN` | 任意* | `lurest-inc/private-workflows` へのアクセス権を持つ PAT。リポジトリ管理者から取得してください。 |
 
-> **注意**: `LUREST_DISPATCH_TOKEN` が無効またはアクセス権がない場合、`gatewayGuard` ジョブでワークフローが停止します。
-
+> * ワークフロー定義上は任意ですが、未設定の場合でも `gatewayGuard` ジョブで失敗するため、通常の利用時は設定することを強く推奨します。
+> **注意**: `LUREST_DISPATCH_TOKEN` が未設定、無効、またはアクセス権がない場合、`gatewayGuard` ジョブでワークフローが停止します。
 ## ジョブ構成
 
 ```
