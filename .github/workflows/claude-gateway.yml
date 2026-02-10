@@ -6,9 +6,29 @@ on:
       GITHUB_TOKEN:
         description: "GitHub Token for accessing repository"
         required: true
+      LUREST_DISPATCH_TOKEN:
+        description: "PAT for accessing lurest-inc/private-workflows"
+        required: true
 
 jobs:
+  gatewayGuard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify access to private-workflows
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer ${{ secrets.LUREST_DISPATCH_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/lurest-inc/private-workflows)
+          echo "HTTP Status: $HTTP_STATUS"
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "::error::LUREST_DISPATCH_TOKEN does not have access to lurest-inc/private-workflows (HTTP $HTTP_STATUS)"
+            exit 1
+          fi
+          echo "Access verified successfully"
+
   gateway:
+    needs: gatewayGuard
     uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@main
     with:
       event_name: ${{ github.event_name }}
