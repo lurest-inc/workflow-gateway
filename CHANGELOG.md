@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.2...v0.0.3) (2026-02-10)
+
+
+### バグ修正
+
+* **workflows:** GITHUB_TOKEN を owner_token にリネームし予約名衝突を解消する ([#37](https://github.com/lurest-inc/workflow-gateway/issues/37)) ([b94baba](https://github.com/lurest-inc/workflow-gateway/commit/b94baba5ca7b425c933d6430eae36c9fde456c3f))
+
 ## [0.0.2](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.1...v0.0.2) (2026-02-10)
 
 
