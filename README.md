@@ -4,7 +4,13 @@
 
 Lurest の private workflows を `workflow_dispatch` で起動するための **Gateway**（入口）です。
 
-📄 **ドキュメント**: [https://lurest-inc.github.io/workflow-gateway/](https://lurest-inc.github.io/workflow-gateway/)
+📄 **ドキュメント（HTML版）**: [https://lurest-inc.github.io/workflow-gateway/](https://lurest-inc.github.io/workflow-gateway/)
+
+| ワークフロー | ドキュメント |
+|------------|------------|
+| Claude Gateway | [docs/claude-gateway.md](docs/claude-gateway.md) |
+| Call Test | [docs/call-test.md](docs/call-test.md) |
+| Dispatch Test | [docs/dispatch-test.md](docs/dispatch-test.md) |
 
 ## 🚀 Claude Gateway の使い方（推奨）
 
