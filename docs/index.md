@@ -1,8 +1,18 @@
-# Lurest Workflow Gateway
+# Lurest Workflow Gateway ドキュメント
 
-このページは `workflow-gateway` のドキュメントです。
+外部リポジトリから `lurest-inc/private-workflows` を安全に呼び出すための **Gateway** ワークフロー集です。
 
-- 外部リポジトリから `uses:` で呼び出す入口（reusable workflow）
-- 内部の `private-workflows` を `workflow_dispatch` で起動します
+## ワークフロー一覧
 
-詳細は README を参照してください。
+| ワークフロー | 説明 | トリガー |
+|------------|------|---------|
+| [Claude Gateway](claude-gateway.md) | Claude による自動化の統合エントリーポイント | `workflow_call` |
+
+## はじめに
+
+Claude による自動化を導入する場合は **[Claude Gateway](claude-gateway.md)** のページをご覧ください。
+
+## リポジトリ
+
+- GitHub: [lurest-inc/workflow-gateway](https://github.com/lurest-inc/workflow-gateway)
+- README: [README.md](https://github.com/lurest-inc/workflow-gateway/blob/main/README.md)
