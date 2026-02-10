@@ -6,9 +6,6 @@ on:
       GITHUB_TOKEN:
         description: "GitHub Token for accessing repository"
         required: true
-      CLAUDE_CODE_OAUTH_TOKEN:
-        description: "Claude Code OAuth Token"
-        required: true
 
 jobs:
   gateway:
@@ -25,4 +22,3 @@ jobs:
       sender_login: ${{ github.event.sender.login || '' }}
     secrets:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
