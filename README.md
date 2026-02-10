@@ -24,14 +24,14 @@ Lurest の private workflows を `workflow_dispatch` で起動するための **
 
 このワークフローを利用するには、事前に以下の手順を踏む必要があります。
 
-### 1. @mabubu0203 に PAT 発行を依頼する
-
-Issue またはメッセージで @mabubu0203 に `LUREST_DISPATCH_TOKEN` の発行を依頼してください。
-
-### 2. リポジトリに @mabubu0203 を招待する
+### 1. リポジトリに @mabubu0203 を招待する
 
 リポジトリの **Settings > Collaborators** から @mabubu0203 を招待してください。
-@mabubu0203 が Secret の登録まで行います。
+
+### 2. @mabubu0203 に PAT 発行を依頼する
+
+Issue またはメッセージで @mabubu0203 に `LUREST_DISPATCH_TOKEN` の発行を依頼してください。
+@mabubu0203 が PAT の発行から Secret の登録まで行います。
 
 > @mabubu0203 側の作業内容は [docs/setup-for-admin.md](docs/setup-for-admin.md) を参照してください。
 
