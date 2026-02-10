@@ -40,7 +40,7 @@ jobs:
 
   gateway:
     needs: gatewayGuard
-    uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@main
+    uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@v0.0.2
     with:
       event_name: ${{ github.event_name }}
       action: ${{ github.event.action || '' }}
