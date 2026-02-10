@@ -31,15 +31,7 @@ Issue またはメッセージで @mabubu0203 に `LUREST_DISPATCH_TOKEN` の発
 ### 2. リポジトリに @mabubu0203 を招待する
 
 リポジトリの **Settings > Collaborators** から @mabubu0203 を招待してください。
-（PAT の発行に必要なリポジトリへのアクセス権確認のために必要です）
-
-### 3. PAT を Secret として登録する
-
-@mabubu0203 から PAT が共有されたら、リポジトリの **Settings > Secrets and variables > Actions** に登録してください。
-
-| Secret名 | 値 |
-|---------|---|
-| `LUREST_DISPATCH_TOKEN` | @mabubu0203 から受け取った PAT |
+@mabubu0203 が Secret の登録まで行います。
 
 > @mabubu0203 側の作業内容は [docs/setup-for-admin.md](docs/setup-for-admin.md) を参照してください。
 
