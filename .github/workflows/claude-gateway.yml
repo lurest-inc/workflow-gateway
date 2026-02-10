@@ -1,0 +1,47 @@
+name: Claude Gateway
+
+on:
+  issues:
+    types: [opened, edited, labeled, unlabeled]
+  pull_request:
+    types: [opened, edited, labeled, unlabeled, synchronize]
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue番号（オプション）'
+        required: false
+        type: string
+      pr_number:
+        description: 'PR番号（オプション）'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch to private workflows
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.LUREST_DISPATCH_TOKEN }}
+          repository: lurest-inc/private-workflows
+          event-type: claude-event
+          client-payload: |
+            {
+              "event_name": "${{ github.event_name }}",
+              "action": "${{ github.event.action }}",
+              "repository": "${{ github.repository }}",
+              "sender": "${{ github.event.sender.login }}",
+              "issue_number": "${{ github.event_name == 'workflow_dispatch' && inputs.issue_number || github.event.issue.number || '' }}",
+              "pr_number": "${{ github.event_name == 'workflow_dispatch' && inputs.pr_number || github.event.pull_request.number || '' }}",
+              "event": ${{ toJson(github.event) }}
+            }
