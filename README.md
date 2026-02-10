@@ -9,8 +9,6 @@ Lurest の private workflows を `workflow_dispatch` で起動するための **
 | ワークフロー | ドキュメント |
 |------------|------------|
 | Claude Gateway | [docs/claude-gateway.md](docs/claude-gateway.md) |
-| Call Test | [docs/call-test.md](docs/call-test.md) |
-| Dispatch Test | [docs/dispatch-test.md](docs/dispatch-test.md) |
 
 ## 🚀 Claude Gateway の使い方（推奨）
 

@@ -7,8 +7,6 @@
 | ワークフロー | 説明 | トリガー |
 |------------|------|---------|
 | [Claude Gateway](claude-gateway.md) | Claude による自動化の統合エントリーポイント | `workflow_call` |
-| [Call Test](call-test.md) | private-workflows のテストワークフローを reusable workflow で呼び出す | `workflow_call` |
-| [Dispatch Test](dispatch-test.md) | private-workflows のテストワークフローを手動で起動する | `workflow_dispatch` |
 
 ## はじめに
 
