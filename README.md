@@ -14,9 +14,14 @@ Lurest の private workflows を `workflow_dispatch` で起動するための **
 
 #### 1. Secret を追加
 
-特別なSecretの設定は不要です。GitHub Actionsが自動的に提供する `GITHUB_TOKEN` を使用します。
+リポジトリの **Settings > Secrets and variables > Actions** で以下の2つのSecretを登録します。
 
-> **注意**: `GITHUB_TOKEN` は通常、GitHub Actionsによって自動的に設定されます。明示的な設定は不要ですが、ワークフローファイルで渡す必要があります。
+| Secret名 | 説明 |
+|---------|------|
+| `GITHUB_TOKEN` | GitHub Actionsが自動提供するトークン。明示的な設定は不要ですが、ワークフローで渡す必要があります。 |
+| `LUREST_DISPATCH_TOKEN` | `lurest-inc/private-workflows` へのアクセス権を持つ PAT（Personal Access Token）。リポジトリ管理者から取得してください。 |
+
+> **注意**: `LUREST_DISPATCH_TOKEN` が無効またはアクセス権がない場合、ワークフローの実行は `gatewayGuard` ジョブで停止されます。
 
 #### 2. ワークフローファイルを作成
 
@@ -40,6 +45,7 @@ jobs:
     uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@main
     secrets:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
 ```
 
 #### 3. 使い方
