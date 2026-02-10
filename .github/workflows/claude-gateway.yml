@@ -3,15 +3,12 @@ name: Claude Gateway
 on:
   workflow_call:
     secrets:
-      LUREST_DISPATCH_TOKEN:
-        description: "fine-grained PAT (private-workflows に対して Actions: write が必要)"
-        required: true
       GITHUB_TOKEN:
         description: "GitHub Token for accessing repository"
-        required: false
+        required: true
       CLAUDE_CODE_OAUTH_TOKEN:
         description: "Claude Code OAuth Token"
-        required: false
+        required: true
 
 permissions:
   contents: read
@@ -23,8 +20,14 @@ jobs:
     uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@main
     with:
       event_name: ${{ github.event_name }}
+      action: ${{ github.event.action || '' }}
       repository: ${{ github.repository }}
+      label_name: ${{ github.event.label.name || '' }}
+      comment_body: ${{ github.event.comment.body || '' }}
+      author_association: ${{ github.event.comment.author_association || '' }}
+      issue_number: ${{ github.event.issue.number || '' }}
+      pr_number: ${{ github.event.pull_request.number || '' }}
+      sender_login: ${{ github.event.sender.login || '' }}
     secrets:
-      LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
