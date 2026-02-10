@@ -17,8 +17,11 @@
 | 項目 | 設定値 |
 |------|--------|
 | Resource owner | `lurest-inc` |
+| Expiration | `30 days`（30日ごとに再発行が必要） |
 | Repository access | `Only select repositories` → `private-workflows` を選択 |
 | Permissions > Actions | `Read and write` |
+
+> **注意**: PAT の有効期限は **30日間**です。期限切れ前に再発行して利用者に共有してください。
 
 4. 発行された PAT を利用者に共有する
 
@@ -27,6 +30,4 @@
 発行した PAT を安全な方法（DM 等）で利用者に共有してください。
 PAT は一度しか表示されないため、共有前にコピーしておくこと。
 
-## 4. 利用者側の登録完了を確認する
-
-利用者が `LUREST_DISPATCH_TOKEN` として Secret を登録したら、ワークフローが正常に動作することを確認してください。
+> Secret へのリポジトリ登録は利用者が行います。
