@@ -6,9 +6,9 @@ Lurest の private workflows を `workflow_dispatch` で起動するための **
 
 📄 **ドキュメント（HTML版）**: [https://lurest-inc.github.io/workflow-gateway/](https://lurest-inc.github.io/workflow-gateway/)
 
-| ワークフロー | ドキュメント |
-|------------|------------|
-| Claude Gateway | [docs/claude-gateway.md](docs/claude-gateway.md) |
+| ワークフロー | md | html |
+|------------|------------|------------|
+| Claude Gateway | [docs/claude-gateway.md](docs/claude-gateway.md) | [/claude-gateway](https://lurest-inc.github.io/workflow-gateway/claude-gateway) |
 
 ## 共通セットアップ
 
@@ -16,5 +16,30 @@ Lurest の private workflows を `workflow_dispatch` で起動するための **
 
 | Secret名 | 説明 |
 |---------|------|
-| `GITHUB_TOKEN` | GitHub Actions が自動提供するトークン。明示的な設定は不要ですが、ワークフローで渡す必要があります。 |
 | `LUREST_DISPATCH_TOKEN` | `lurest-inc/private-workflows` へのアクセス権を持つ PAT（Personal Access Token）。リポジトリ管理者から取得してください。 |
+
+> **注意**: `LUREST_DISPATCH_TOKEN` が無効またはアクセス権がない場合、ワークフローの実行は `gatewayGuard` ジョブで停止されます。
+
+## 依頼について
+
+このワークフローを利用するには、事前に以下の手順を踏む必要があります。
+
+### 1. @mabubu0203 に PAT 発行を依頼する
+
+Issue またはメッセージで @mabubu0203 に `LUREST_DISPATCH_TOKEN` の発行を依頼してください。
+
+### 2. リポジトリに @mabubu0203 を招待する
+
+リポジトリの **Settings > Collaborators** から @mabubu0203 を招待してください。
+（PAT の発行に必要なリポジトリへのアクセス権確認のために必要です）
+
+### 3. PAT を Secret として登録する
+
+@mabubu0203 から PAT が共有されたら、リポジトリの **Settings > Secrets and variables > Actions** に登録してください。
+
+| Secret名 | 値 |
+|---------|---|
+| `LUREST_DISPATCH_TOKEN` | @mabubu0203 から受け取った PAT |
+
+> @mabubu0203 側の作業内容は [docs/setup-for-admin.md](docs/setup-for-admin.md) を参照してください。
+
