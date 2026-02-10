@@ -3,7 +3,7 @@ name: Claude Gateway
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      owner_token:
         description: "GitHub Token for accessing repository"
         required: true
       LUREST_DISPATCH_TOKEN:
@@ -40,7 +40,7 @@ jobs:
 
   gateway:
     needs: gatewayGuard
-    uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@v0.0.2
+    uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@v0.0.3
     with:
       event_name: ${{ github.event_name }}
       action: ${{ github.event.action || '' }}
@@ -52,4 +52,4 @@ jobs:
       pr_number: ${{ github.event.pull_request.number || '' }}
       sender_login: ${{ github.event.sender.login || '' }}
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      owner_token: ${{ secrets.owner_token }}
