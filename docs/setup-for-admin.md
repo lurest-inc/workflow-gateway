@@ -20,6 +20,7 @@
 | Expiration | `30 days`（30日ごとに再発行が必要） |
 | Repository access | `Only select repositories` → `private-workflows` を選択 |
 | Permissions > Actions | `Read and write` |
+| Permissions > Contents | `Read-only` |
 
 > **注意**: PAT の有効期限は **30日間**です。期限切れ前に再発行して利用者に共有してください。
 
