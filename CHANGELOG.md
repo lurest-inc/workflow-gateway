@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.3...v0.0.4) (2026-02-11)
+
+
+### その他の変更
+
+* private-workflowsの参照バージョンをv0.0.4に更新し dispatch_token を追加する ([#40](https://github.com/lurest-inc/workflow-gateway/issues/40)) ([1dcca08](https://github.com/lurest-inc/workflow-gateway/commit/1dcca0899a52fae3bea56650ad1bb00a2c5472e3))
+
 ## [0.0.3](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.2...v0.0.3) (2026-02-10)
 
 
