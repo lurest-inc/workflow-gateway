@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.5...v0.0.6) (2026-02-11)
+
+
+### ドキュメント
+
+* セットアップ手順を改善しOWNER_TOKENを追加する ([#45](https://github.com/lurest-inc/workflow-gateway/issues/45)) ([#46](https://github.com/lurest-inc/workflow-gateway/issues/46)) ([e8bef16](https://github.com/lurest-inc/workflow-gateway/commit/e8bef1637c1c10f397cfa0fb6affe458d87fa571))
+
 ## [0.0.5](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.4...v0.0.5) (2026-02-11)
 
 
