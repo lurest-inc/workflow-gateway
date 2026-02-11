@@ -13,11 +13,9 @@
 
 | Secret名 | 必須 | 説明 |
 |---------|:----:|------|
-| `owner_token` | ✅ | GitHub Actions が自動提供するトークン。明示的な設定は不要ですが、呼び出し元で渡す必要があります。 |
-| `LUREST_DISPATCH_TOKEN` | 任意* | `lurest-inc/private-workflows` へのアクセス権を持つ PAT。リポジトリ管理者から取得してください。 |
+| `OWNER_TOKEN` | ✅ | 利用者のリポジトリへのアクセス権を持つ PAT。`lurest-inc/private-workflows` でのクロスリポジトリのチェックアウトと ClaudeCodeAction の実行に必要です。 |
+| `LUREST_DISPATCH_TOKEN` | ✅  | `lurest-inc/private-workflows` へのアクセス権を持つ PAT。gateway が private-workflows のワークフローを呼び出すために必要です。 |
 
-> * ワークフロー定義上は任意ですが、未設定の場合でも `gatewayGuard` ジョブで失敗するため、通常の利用時は設定することを強く推奨します。
-> **注意**: `LUREST_DISPATCH_TOKEN` が未設定、無効、またはアクセス権がない場合、`gatewayGuard` ジョブでワークフローが停止します。
 ## ジョブ構成
 
 ```
@@ -36,9 +34,9 @@ name: Setup Claude
 
 on:
   issues:
-    types: [opened, edited, labeled, unlabeled]
+    types: [opened, labeled]
   pull_request:
-    types: [opened, edited, labeled, unlabeled, synchronize]
+    types: [opened, labeled]
   issue_comment:
     types: [created]
   pull_request_review_comment:
@@ -46,9 +44,9 @@ on:
 
 jobs:
   claude:
-    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.3
+    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.6
     secrets:
-      owner_token: ${{ secrets.GITHUB_TOKEN }}
+      owner_token: ${{ secrets.OWNER_TOKEN }}
       LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
 ```
 
