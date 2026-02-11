@@ -8,7 +8,7 @@ on:
         required: true
       LUREST_DISPATCH_TOKEN:
         description: "PAT for accessing lurest-inc/private-workflows"
-        required: false
+        required: true
 
 jobs:
   gatewayGuard:
