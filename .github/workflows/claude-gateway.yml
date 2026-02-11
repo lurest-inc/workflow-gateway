@@ -13,8 +13,6 @@ on:
 jobs:
   gatewayGuard:
     runs-on: ubuntu-latest
-    outputs:
-      default_branch: ${{ steps.verify.outputs.default_branch }}
     steps:
       - name: Verify access to private-workflows
         id: verify
@@ -29,8 +27,6 @@ jobs:
             "https://api.github.com/repos/lurest-inc/private-workflows/git/ref/tags/${REF}")
 
           [ "$HTTP_STATUS" = "200" ] || (echo "::error::Token verification failed" && exit 1)
-
-          echo "ref=$REF" >> $GITHUB_OUTPUT
         env:
           PRIVATE_WORKFLOWS_REF: v0.0.5
           TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
