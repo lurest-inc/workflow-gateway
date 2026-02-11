@@ -40,7 +40,7 @@ jobs:
 
   gateway:
     needs: gatewayGuard
-    uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@v0.0.3
+    uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@v0.0.4
     with:
       event_name: ${{ github.event_name }}
       action: ${{ github.event.action || '' }}
@@ -53,3 +53,4 @@ jobs:
       sender_login: ${{ github.event.sender.login || '' }}
     secrets:
       owner_token: ${{ secrets.owner_token }}
+      dispatch_token: ${{ secrets.LUREST_DISPATCH_TOKEN }}

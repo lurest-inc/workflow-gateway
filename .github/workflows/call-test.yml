@@ -21,7 +21,7 @@ on:
 jobs:
   call-test-b:
     if: ${{ inputs.target == 'test-b' }}
-    uses: lurest-inc/private-workflows/.github/workflows/test-b.yml@v0.0.3
+    uses: lurest-inc/private-workflows/.github/workflows/test-b.yml@v0.0.4
     with:
       caller_repo: ${{ github.repository }}
       message: ${{ inputs.message }}
