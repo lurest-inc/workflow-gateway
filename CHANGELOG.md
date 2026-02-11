@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.7](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.6...v0.0.7) (2026-02-11)
+
+
+### バグ修正
+
+* **workflows:** version upp * fix(workflows): fix(workflows): version upp ([#48](https://github.com/lurest-inc/workflow-gateway/issues/48)) ([43e1ec3](https://github.com/lurest-inc/workflow-gateway/commit/43e1ec34b92d1c57055524eac36508c8c3df158e))
+
 ## [0.0.6](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.5...v0.0.6) (2026-02-11)
 
 
