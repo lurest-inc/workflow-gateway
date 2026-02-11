@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.4...v0.0.5) (2026-02-11)
+
+
+### バグ修正
+
+* **workflows:** PAT検証をタグ参照に統一しAPI呼び出しを削減 ([#43](https://github.com/lurest-inc/workflow-gateway/issues/43)) ([f06c5d8](https://github.com/lurest-inc/workflow-gateway/commit/f06c5d80b80a990fd172e735e373ef502a9e5925))
+
 ## [0.0.4](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.3...v0.0.4) (2026-02-11)
 
 
