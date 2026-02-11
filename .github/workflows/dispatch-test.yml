@@ -73,7 +73,7 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           TARGET_REPO: lurest-inc/private-workflows
           WORKFLOW_FILE: ${{ steps.resolve.outputs.workflow_file }}
-          TARGET_REF: v0.0.3
+          TARGET_REF: v0.0.4
           CALLER_REPO: ${{ github.repository }}
           MESSAGE: ${{ inputs.message }}
         run: |
