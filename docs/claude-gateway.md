@@ -29,6 +29,8 @@ gatewayGuard → gateway
 
 ## 呼び出しサンプル
 
+### Issue / PR / コメントによる操作
+
 ```yaml
 name: Setup Claude
 
@@ -50,6 +52,33 @@ jobs:
       LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
 ```
 
+### Daily Docs Maintenance（毎日自動ドキュメント保守）
+
+```yaml
+name: Daily Docs Maintenance
+
+on:
+  # 毎日 JST 03:30（UTC 18:30）に実行
+  schedule:
+    - cron: "30 18 * * *"
+  # 手動実行（動作確認用）
+  workflow_dispatch:
+
+# 二重起動を防止
+concurrency:
+  group: daily-docs
+  cancel-in-progress: false
+
+jobs:
+  daily-docs:
+    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.6
+    secrets:
+      owner_token: ${{ secrets.OWNER_TOKEN }}
+      LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
+```
+
+> **注意**: `schedule` トリガーの場合、`event_name` が `schedule` として渡されるため、`cc-gateway-receiver.yml` は自動的に `daily-docs` ジョブにルーティングします。
+
 ## 使い方
 
 ### Issue 自動実装
@@ -63,3 +92,9 @@ jobs:
 ### インタラクティブ操作
 1. Issue または PR のコメントで `@claude` とメンションして指示を書く
 2. Claude が指示に従って作業を実行します
+
+### Daily Docs Maintenance（毎日自動ドキュメント保守）
+1. 上記の呼び出しサンプルを参考に、リポジトリに `daily-docs.yml` を作成する
+2. cron スケジュール（例: 毎日 JST 03:30 = `30 18 * * *`）で自動実行される
+3. Claude が対象リポジトリのドキュメントを自動的に保守・更新します
+4. 実行ゲート: JST 深夜帯（00:00〜05:59）かつ当日1回のみ実行されます
