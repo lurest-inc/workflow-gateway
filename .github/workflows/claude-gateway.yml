@@ -28,12 +28,12 @@ jobs:
 
           [ "$HTTP_STATUS" = "200" ] || (echo "::error::Token verification failed" && exit 1)
         env:
-          PRIVATE_WORKFLOWS_REF: v0.0.8
+          PRIVATE_WORKFLOWS_REF: v0.0.10
           TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
 
   gateway:
     needs: gatewayGuard
-    uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@v0.0.8
+    uses: lurest-inc/private-workflows/.github/workflows/cc-gateway-receiver.yml@v0.0.10
     with:
       event_name: ${{ github.event_name }}
       action: ${{ github.event.action || '' }}
