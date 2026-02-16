@@ -89,13 +89,17 @@ git checkout -b setup/claude-gateway
 
 #### 2.1 ワークフローファイルを作成する
 
-`.github/workflows/` ディレクトリを作成し、以下の内容で `setup-claude.yml` を新規作成してください。
+`.github/workflows/` ディレクトリを作成し、`.yml` を新規作成してください。
 
 [docs/claude-gateway.md](../docs/claude-gateway.md) の「呼び出しサンプル」を参考にして下さい。
 
 #### 2.2 Claude Code コマンド設定を追加する
 
 `.claude/commands/` ディレクトリを作成し、private-workflows で利用するファイルを追加してください。
+
+- actions/daily-docs-maintenance.md
+- actions/exec-issue.md
+- actions/fix-pr.md
 
 ### 3. コミットして Push する
 
@@ -107,6 +111,6 @@ git push origin setup/claude-gateway
 
 ### 4. Pull Request を作成する
 
-GitHub で PR を作成し、レビュー後に main ブランチにマージしてください。
+GitHub で PR を作成し、レビュー後に デフォルト ブランチにマージしてください。
 
 > **注意**: ワークフローが正しく動作することを確認してから、利用者に通知してください。
