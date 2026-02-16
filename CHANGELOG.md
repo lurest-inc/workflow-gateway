@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.8](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.7...v0.0.8) (2026-02-16)
+
+
+### ドキュメント
+
+* claude-gateway.md に daily-docs-maintenance の呼び出しサンプルを追加する ([#51](https://github.com/lurest-inc/workflow-gateway/issues/51)) ([9946ada](https://github.com/lurest-inc/workflow-gateway/commit/9946adae127996bfbfcea7716ea177f6795a07e4))
+
 ## [0.0.7](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.6...v0.0.7) (2026-02-11)
 
 
