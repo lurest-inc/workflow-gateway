@@ -46,7 +46,7 @@ on:
 
 jobs:
   claude:
-    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.6
+    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.8
     secrets:
       owner_token: ${{ secrets.OWNER_TOKEN }}
       LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
@@ -61,8 +61,6 @@ on:
   # 毎日 JST 03:30（UTC 18:30）に実行
   schedule:
     - cron: "30 18 * * *"
-  # 手動実行（動作確認用）
-  workflow_dispatch:
 
 # 二重起動を防止
 concurrency:
@@ -71,7 +69,7 @@ concurrency:
 
 jobs:
   daily-docs:
-    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.6
+    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.8
     secrets:
       owner_token: ${{ secrets.OWNER_TOKEN }}
       LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
@@ -82,19 +80,22 @@ jobs:
 ## 使い方
 
 ### Issue 自動実装
-1. Issue に `claude-implement` ラベルを付ける
-2. Claude が自動的に Issue の内容を実装して PR を作成します
+1. 呼び出しサンプルを参考に、リポジトリに `claude.yml` を作成する
+2. Issue に `claude-implement` ラベルを付ける
+3. Claude が自動的に Issue の内容を実装して PR を作成します
 
 ### PR レビュー修正
-1. PR に `claude-fix-review` ラベルを付ける
-2. Claude が自動的にレビューコメントを読んで修正します
+1. 呼び出しサンプルを参考に、リポジトリに `claude.yml` を作成する
+2. PR に `claude-fix-review` ラベルを付ける
+3. Claude が自動的にレビューコメントを読んで修正します
 
 ### インタラクティブ操作
-1. Issue または PR のコメントで `@claude` とメンションして指示を書く
-2. Claude が指示に従って作業を実行します
+1. 呼び出しサンプルを参考に、リポジトリに `claude.yml` を作成する
+2. Issue または PR のコメントで `@claude` とメンションして指示を書く
+3. Claude が指示に従って作業を実行します
 
 ### Daily Docs Maintenance（毎日自動ドキュメント保守）
-1. 上記の呼び出しサンプルを参考に、リポジトリに `daily-docs.yml` を作成する
+1. 呼び出しサンプルを参考に、リポジトリに `daily-docs.yml` を作成する
 2. cron スケジュール（例: 毎日 JST 03:30 = `30 18 * * *`）で自動実行される
 3. Claude が対象リポジトリのドキュメントを自動的に保守・更新します
 4. 実行ゲート: JST 深夜帯（00:00〜05:59）かつ当日1回のみ実行されます
