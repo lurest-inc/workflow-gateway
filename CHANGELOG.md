@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.10](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.9...v0.0.10) (2026-02-17)
+
+
+### その他の変更
+
+* update workflow references to v0.0.11 and remove test workflows ([#57](https://github.com/lurest-inc/workflow-gateway/issues/57)) ([8d5f0eb](https://github.com/lurest-inc/workflow-gateway/commit/8d5f0eb1dc7df7da6bf28d55669be4f742f6dccd))
+
 ## [0.0.9](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.8...v0.0.9) (2026-02-16)
 
 
