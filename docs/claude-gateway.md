@@ -32,7 +32,7 @@ gatewayGuard → gateway
 ### Issue / PR / コメントによる操作
 
 ```yaml
-name: Setup Claude
+name: Claude Code Github Actions
 
 on:
   issues:
