@@ -75,7 +75,22 @@
 | `OWNER_TOKEN` | `利用者のリポジトリ` で発行した PAT |
 | `LUREST_DISPATCH_TOKEN` | `lurest-inc/private-workflows` で発行した PAT |
 
-## 5. 利用者のリポジトリに Workflow ファイルを追加する
+## 5. GitHub ラベルを作成する
+
+Claude Gateway を利用するために必要なラベルを、利用者のリポジトリに作成します。
+
+1. リポジトリの **Settings > Labels** を開く
+2. **New label** をクリック
+3. 以下のラベルを作成する
+
+| Label名 | 説明 | 色 |
+|---------|------|-----|
+| `claude-implement` | Issue の内容を Claude が自動実装する | `#0366d6`（Blue） |
+| `claude-fix-review` | PR のレビューコメントを Claude が自動修正する | `#a2eeef`（Aqua） |
+
+> **参考**: これらのラベルは [docs/claude-gateway.md](../docs/claude-gateway.md) の「使い方」で詳しく説明されています。
+
+## 6. 利用者のリポジトリに Workflow ファイルを追加する
 
 Claude Gateway のワークフローファイルを利用者のリポジトリに追加します。
 
@@ -100,6 +115,8 @@ git checkout -b setup/claude-gateway
 - actions/daily-docs-maintenance.md
 - actions/exec-issue.md
 - actions/fix-pr.md
+
+`.claude/docs/actions/homework.md` ファイルを作成。
 
 ### 3. コミットして Push する
 
