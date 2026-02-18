@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.12](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.11...v0.0.12) (2026-02-18)
+
+
+### その他の変更
+
+* update workflow references to v0.0.13 and enhance setup docs ([#63](https://github.com/lurest-inc/workflow-gateway/issues/63)) ([d350bdc](https://github.com/lurest-inc/workflow-gateway/commit/d350bdc193df4171d39a9da3d810ac25fd17d1a4))
+
 ## [0.0.11](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.10...v0.0.11) (2026-02-17)
 
 
