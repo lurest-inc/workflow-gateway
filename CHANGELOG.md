@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.13](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.12...v0.0.13) (2026-02-19)
+
+
+### その他の変更
+
+* .claude/settings.jsonを最新化 ([#66](https://github.com/lurest-inc/workflow-gateway/issues/66)) ([5a20747](https://github.com/lurest-inc/workflow-gateway/commit/5a20747db9316e3ca655b271933c2c4f1e4b3b3f))
+
 ## [0.0.12](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.11...v0.0.12) (2026-02-18)
 
 
