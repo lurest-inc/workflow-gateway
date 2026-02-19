@@ -52,7 +52,13 @@
       "WebFetch(domain:github.com)",
       "WebSearch",
       "mcp__ide__getDiagnostics",
-      "mcp__o3__o3-search"
+      "mcp__o3__o3-search",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(gh release view:*)",
+      "Bash(gh label list:*)",
+      "Bash(gh issue edit:*)",
+      "Bash(gh label create:*)"
     ],
     "ask": [
       "Bash(git rm:*)",
@@ -64,7 +70,23 @@
   "hooks": {
     "PostToolUse": [
       {
-        "hooks": []
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/actionlint-check.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/merge-local-settings.sh"
+          }
+        ]
       }
     ],
     "SessionEnd": [
