@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.14](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.13...v0.0.14) (2026-02-20)
+
+
+### その他の変更
+
+* settings.jsonのpermissionsソート、fix-pr改善、workflow ref更新 ([#69](https://github.com/lurest-inc/workflow-gateway/issues/69)) ([c97a3f9](https://github.com/lurest-inc/workflow-gateway/commit/c97a3f9a8fa38e6a6df07a723900eb22b1740628))
+
 ## [0.0.13](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.12...v0.0.13) (2026-02-19)
 
 
