@@ -25,6 +25,7 @@
          reviewThreads(last: 20) {
            edges {
              node {
+               id
                isResolved
                isOutdated
                path
@@ -111,6 +112,34 @@
 13. ClaudeCode: 各レビューコメントに修正完了の旨を返信する
     - レビュースレッドに対して、修正内容を簡潔に説明
     - 該当するコミットハッシュを記載
+    - **重要: レビュースレッドへの返信API**
+      - REST API (`repos/{owner}/{repo}/pulls/comments/{comment_id}/replies`) は404になる場合がある。**使用禁止**。
+      - 必ず **GraphQL API** の `addPullRequestReviewThreadReply` mutation を使用すること。
+      - 手順:
+        1. まずフェーズ1で取得済みのGraphQLクエリに `id` フィールドを追加してスレッドIDを取得する:
+           ```bash
+           gh api graphql -f query="
+           query {
+             repository(owner: \"${OWNER}\", name: \"${REPO}\") {
+               pullRequest(number: ${PR_NUMBER}) {
+                 reviewThreads(last: 20) {
+                   edges {
+                     node {
+                       id
+                       isResolved
+                       path
+                       line
+                     }
+                   }
+                 }
+               }
+             }
+           }" --jq '.data.repository.pullRequest.reviewThreads.edges[] | select(.node.isResolved == false) | {id: .node.id, path: .node.path, line: .node.line}'
+           ```
+        2. 取得したスレッドID (`PRRT_...`) を使って返信する:
+           ```bash
+           gh api graphql -f query='mutation { addPullRequestReviewThreadReply(input: {pullRequestReviewThreadId: "PRRT_xxx", body: "返信本文"}) { comment { id } } }'
+           ```
 
 14. ClaudeCode: 必要に応じてPR descriptionを更新する
     - 大きな変更があった場合は、変更内容をPR descriptionに追記
