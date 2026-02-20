@@ -2,7 +2,7 @@
   "name": "@lurest-inc/workflow-gateway",
   "description": "",
   "author": "mabubu0203 <mabu_ip@msn.com> (https://github.com/mabubu0203/)",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "private": true,
   "devDependencies": {
     "@biomejs/biome": "2.4.0",
