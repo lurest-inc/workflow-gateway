@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.17](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.16...v0.0.17) (2026-02-22)
+
+
+### その他の変更
+
+* ワークフロー参照を更新しスキル設定を追加 ([#78](https://github.com/lurest-inc/workflow-gateway/issues/78)) ([2ddbad5](https://github.com/lurest-inc/workflow-gateway/commit/2ddbad5c77c5c4a557bd479f4c01e67096ff651b))
+
 ## [0.0.16](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.15...v0.0.16) (2026-02-20)
 
 
