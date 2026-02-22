@@ -46,7 +46,7 @@ on:
 
 jobs:
   claude:
-    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.10
+    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.17
     secrets:
       owner_token: ${{ secrets.OWNER_TOKEN }}
       LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
@@ -69,7 +69,7 @@ concurrency:
 
 jobs:
   daily-docs:
-    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.10
+    uses: lurest-inc/workflow-gateway/.github/workflows/claude-gateway.yml@v0.0.17
     secrets:
       owner_token: ${{ secrets.OWNER_TOKEN }}
       LUREST_DISPATCH_TOKEN: ${{ secrets.LUREST_DISPATCH_TOKEN }}
