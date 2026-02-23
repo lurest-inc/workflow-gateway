@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.18](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.17...v0.0.18) (2026-02-23)
+
+
+### その他の変更
+
+* ワークフロー参照をv0.0.20に更新 [#80](https://github.com/lurest-inc/workflow-gateway/issues/80) ([#81](https://github.com/lurest-inc/workflow-gateway/issues/81)) ([01d0e11](https://github.com/lurest-inc/workflow-gateway/commit/01d0e11eb934fdea92aaebcda789be4fe81fe108))
+
 ## [0.0.17](https://github.com/lurest-inc/workflow-gateway/compare/v0.0.16...v0.0.17) (2026-02-22)
 
 
